@@ -15,7 +15,7 @@ const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 object RetroFitClient {
 
 
-    val instance: PhotoApi by lazy {
+    private val instance: PhotoApi by lazy {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
