@@ -26,13 +26,8 @@ class PhotoFragment : Fragment(R.layout.fragment_item_list) {
     lateinit var viewModel: MainViewModel
     private val photoAdapter = PhotoRecyclerViewAdapter(arrayListOf())
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
-
-
-    fun observeViewModel(){
+    private fun observeViewModel(){
         viewModel.photosLiveData.observe(viewLifecycleOwner, Observer {
 
             it?.let {
@@ -51,12 +46,8 @@ class PhotoFragment : Fragment(R.layout.fragment_item_list) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = photoAdapter
         }
-
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         observeViewModel()
-
-
-
     }
 
     companion object {

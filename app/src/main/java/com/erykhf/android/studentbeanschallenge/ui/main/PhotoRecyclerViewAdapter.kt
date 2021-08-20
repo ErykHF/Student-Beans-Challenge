@@ -9,6 +9,7 @@ import com.erykhf.android.studentbeanschallenge.R
 import com.erykhf.android.studentbeanschallenge.utils.loadImage
 
 
+
 class PhotoRecyclerViewAdapter(var photos: ArrayList<PhotosDataItem>) :
     RecyclerView.Adapter<PhotoRecyclerViewAdapter.ViewHolder>() {
 
@@ -49,7 +50,7 @@ class PhotoRecyclerViewAdapter(var photos: ArrayList<PhotosDataItem>) :
         fun bind(photoData: PhotosDataItem) {
             val photoUri = photoData.thumbnailUrl
             photoText.text = photoData.title
-            photoImage.loadImage(photoData.thumbnailUrl, R.drawable.ic_launcher_foreground)
+            photoImage.loadImage("$photoUri.jpg")
 
 
         }
