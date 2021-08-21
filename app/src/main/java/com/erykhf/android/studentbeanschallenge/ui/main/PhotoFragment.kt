@@ -2,9 +2,8 @@ package com.erykhf.android.studentbeanschallenge.ui.main
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toolbar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,19 +19,8 @@ class PhotoFragment : Fragment(R.layout.fragment_item_list) {
     private lateinit var binding: FragmentItemListBinding
 
 
-    lateinit var viewModel: MainViewModel
+    lateinit var viewModel: PhotoFragmentViewModel
     private val photoAdapter = PhotoRecyclerViewAdapter(arrayListOf())
-
-
-    private fun observeViewModel(){
-        viewModel.photosLiveData.observe(viewLifecycleOwner, Observer {
-
-            it?.let {
-                photoAdapter.updatePhotos(it)
-            }
-        })
-    }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,24 +31,44 @@ class PhotoFragment : Fragment(R.layout.fragment_item_list) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = photoAdapter
         }
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PhotoFragmentViewModel::class.java)
         observeViewModel()
 
-//        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar_home)
-//        (requireActivity() as AppCompatActivity?)?.setSupportActionBar(toolbar)
-//
-//        (requireActivity() as AppCompatActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        (requireActivity() as AppCompatActivity?)?.supportActionBar?.setDisplayShowHomeEnabled(true)
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = false
+            viewModel.refresh()
+            observeViewModel()
+        }
 
         binding.toolbarHome.apply {
             setNavigationIcon(R.drawable.ic_baseline_arrow_back)
+            setNavigationOnClickListener {
 
-
+                val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+                val count: Int = fragmentManager.backStackEntryCount
+                for (i in 0 until count) {
+                    fragmentManager.popBackStackImmediate()
+                }
+                fragmentManager
+                    .beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.fragmentContainer, MainFragment.newInstance())
+                    .commit()
+            }
         }
     }
 
-    companion object {
 
+    private fun observeViewModel() {
+        viewModel.photosLiveData.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                binding.photosList.visibility = View.VISIBLE
+                photoAdapter.updatePhotos(it)
+            }
+        })
+    }
+
+    companion object {
         fun newInstance() = PhotoFragment()
     }
 }

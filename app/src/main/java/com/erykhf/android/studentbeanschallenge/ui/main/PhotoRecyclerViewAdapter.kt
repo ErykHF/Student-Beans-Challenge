@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.erykhf.android.studentbeanschallenge.databinding.FragmentItemBinding
 import com.erykhf.android.studentbeanschallenge.model.PhotosDataItem
 import com.erykhf.android.studentbeanschallenge.R
+import com.erykhf.android.studentbeanschallenge.utils.getProgressDrawable
 import com.erykhf.android.studentbeanschallenge.utils.loadImage
 
 
@@ -44,13 +45,14 @@ class PhotoRecyclerViewAdapter(var photos: ArrayList<PhotosDataItem>) :
     inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val photoImage = binding.photoImage
         val photoText = binding.photoText
+        private val progressDrawable = getProgressDrawable(itemView.context)
 
 
 
         fun bind(photoData: PhotosDataItem) {
             val photoUri = photoData.thumbnailUrl
             photoText.text = photoData.title
-            photoImage.loadImage("$photoUri.jpg")
+            photoImage.loadImage("$photoUri.jpg", progressDrawable)
 
 
         }

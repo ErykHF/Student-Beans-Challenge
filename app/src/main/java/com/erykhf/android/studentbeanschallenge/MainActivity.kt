@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.erykhf.android.studentbeanschallenge.databinding.MainActivityBinding
 import com.erykhf.android.studentbeanschallenge.ui.main.MainFragment
-import com.erykhf.android.studentbeanschallenge.ui.main.PhotoFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
+                    .replace(R.id.fragmentContainer, MainFragment.newInstance())
                     .commitNow()
         }
     }
