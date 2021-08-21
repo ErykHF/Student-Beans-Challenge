@@ -32,8 +32,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         binding = MainFragmentBinding.bind(view)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        email = view.findViewById(R.id.email_edit_text)
-        password = view.findViewById(R.id.password_edit_text)
+//        email = view.findViewById(R.id.email_edit_text)
+//        password = view.findViewById(R.id.password_edit_text)
+        email = binding.emailEditText
+        password = binding.passwordEditText
         val loginButton = binding.loginButton
 
 
@@ -56,7 +58,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             password.error = "Enter a password"
             return false
         } else if (passwordInput.length < 6) {
-            password.error = "Password must be 5 characters or longer"
+            password.error = "Password must be 6 characters or longer"
             return false
         }
         password.error = null

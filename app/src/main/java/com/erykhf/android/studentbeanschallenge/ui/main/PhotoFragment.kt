@@ -1,19 +1,16 @@
 package com.erykhf.android.studentbeanschallenge.ui.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.erykhf.android.studentbeanschallenge.R
 import com.erykhf.android.studentbeanschallenge.databinding.FragmentItemListBinding
-import com.erykhf.android.studentbeanschallenge.databinding.MainFragmentBinding
+
 
 /**
  * A fragment representing a list of Items.
@@ -31,7 +28,7 @@ class PhotoFragment : Fragment(R.layout.fragment_item_list) {
         viewModel.photosLiveData.observe(viewLifecycleOwner, Observer {
 
             it?.let {
-                 photoAdapter.updatePhotos(it)
+                photoAdapter.updatePhotos(it)
             }
         })
     }
@@ -48,6 +45,18 @@ class PhotoFragment : Fragment(R.layout.fragment_item_list) {
         }
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         observeViewModel()
+
+//        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar_home)
+//        (requireActivity() as AppCompatActivity?)?.setSupportActionBar(toolbar)
+//
+//        (requireActivity() as AppCompatActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        (requireActivity() as AppCompatActivity?)?.supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        binding.toolbarHome.apply {
+            setNavigationIcon(R.drawable.ic_baseline_arrow_back)
+
+
+        }
     }
 
     companion object {

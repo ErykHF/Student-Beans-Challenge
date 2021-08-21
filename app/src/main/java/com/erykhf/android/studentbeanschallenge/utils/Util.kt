@@ -8,8 +8,6 @@ import com.bumptech.glide.request.RequestOptions
 
 fun ImageView.loadImage(uri: String){
     Glide.with(this.context)
-//        .asBitmap()
-//        .apply(RequestOptions.circleCropTransform())
         .load(uri)
         .into(this)
 }
