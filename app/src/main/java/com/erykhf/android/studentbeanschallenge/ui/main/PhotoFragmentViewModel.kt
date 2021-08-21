@@ -23,7 +23,6 @@ class PhotoFragmentViewModel(application: Application) : AndroidViewModel(applic
 
     fun refresh(){
         photosLiveData = getPhotos()
-
     }
 
     private fun getPhotos(): MutableLiveData<PhotosData> {
@@ -41,42 +40,43 @@ class PhotoFragmentViewModel(application: Application) : AndroidViewModel(applic
                     when (response.code()) {
                         400 -> {
                             Log.e("TAG", "onResponse: ${response.message()} ${response.code()}")
-                            Toast.makeText(getApplication(), response.message(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(getApplication(), response.message(), Toast.LENGTH_SHORT)
+                                .show()
                         }
                         401 -> {
                             Log.e("TAG", "onResponse: ${response.message()} ${response.code()}")
-                            Toast.makeText(getApplication(), response.message(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(getApplication(), response.message(), Toast.LENGTH_SHORT)
+                                .show()
                         }
                         403 -> {
                             Log.e("TAG", "onResponse: ${response.message()} ${response.code()}")
-                            Toast.makeText(getApplication(), response.message(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(getApplication(), response.message(), Toast.LENGTH_SHORT)
+                                .show()
                         }
                         404 -> {
                             Log.e("TAG", "onResponse: ${response.message()} ${response.code()}")
-                            Toast.makeText(getApplication(), response.message(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(getApplication(), response.message(), Toast.LENGTH_SHORT)
+                                .show()
                         }
                         500 -> {
                             Log.e("TAG", "onResponse: ${response.message()} ${response.code()}")
-                            Toast.makeText(getApplication(), response.message(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(getApplication(), response.message(), Toast.LENGTH_SHORT)
+                                .show()
                         }
-                        401 -> Log.e("TAG", "onResponse: ${response.message()} ${response.code()}")
-                        403 -> Log.e("TAG", "onResponse: ${response.message()} ${response.code()}")
-                        404 -> Log.e("TAG", "onResponse: ${response.message()} ${response.code()}")
-                        500 -> Log.e("TAG", "onResponse: ${response.message()} ${response.code()}")
+                        else -> Toast.makeText(
+                            getApplication(),
+                            "Network Error",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                     }
                 }
             }
-
             override fun onFailure(call: Call<PhotosData>, t: Throwable) {
-//                Log.e("TAG", "onFailure: $t", t)
-//                Toast.makeText(getApplication(), "$t", Toast.LENGTH_SHORT).show()
+                Log.e("TAG", "onFailure: $t", t)
+                Toast.makeText(getApplication(), "Network Error!", Toast.LENGTH_SHORT).show()
             }
-
-
         })
-
         return liveDataResponse
     }
-
 }

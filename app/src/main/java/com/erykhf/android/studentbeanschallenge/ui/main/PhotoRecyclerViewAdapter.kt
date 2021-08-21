@@ -47,8 +47,6 @@ class PhotoRecyclerViewAdapter(var photos: ArrayList<PhotosDataItem>) :
         val photoText = binding.photoText
         private val progressDrawable = getProgressDrawable(itemView.context)
 
-
-
         fun bind(photoData: PhotosDataItem) {
             val photoUri = photoData.thumbnailUrl
             photoText.text = photoData.title

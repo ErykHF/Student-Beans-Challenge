@@ -1,6 +1,7 @@
 package com.erykhf.android.studentbeanschallenge.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -31,6 +32,7 @@ class PhotoFragment : Fragment(R.layout.fragment_item_list) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = photoAdapter
         }
+
         viewModel = ViewModelProvider(this).get(PhotoFragmentViewModel::class.java)
         observeViewModel()
 
@@ -58,11 +60,16 @@ class PhotoFragment : Fragment(R.layout.fragment_item_list) {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.photosLiveData.removeObservers(viewLifecycleOwner)
+    }
+
 
     private fun observeViewModel() {
         viewModel.photosLiveData.observe(viewLifecycleOwner, Observer {
             it?.let {
-                binding.photosList.visibility = View.VISIBLE
+                binding.itemFragmentList.visibility = View.VISIBLE
                 photoAdapter.updatePhotos(it)
             }
         })
