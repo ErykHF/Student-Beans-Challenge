@@ -18,8 +18,6 @@ import com.erykhf.android.studentbeanschallenge.databinding.FragmentItemListBind
 class PhotoFragment : Fragment(R.layout.fragment_item_list) {
 
     private lateinit var binding: FragmentItemListBinding
-
-
     lateinit var viewModel: PhotoFragmentViewModel
     private val photoAdapter = PhotoRecyclerViewAdapter(arrayListOf())
 
@@ -28,6 +26,7 @@ class PhotoFragment : Fragment(R.layout.fragment_item_list) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentItemListBinding.bind(view)
+
         binding.photosList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = photoAdapter
@@ -35,17 +34,16 @@ class PhotoFragment : Fragment(R.layout.fragment_item_list) {
 
         viewModel = ViewModelProvider(this).get(PhotoFragmentViewModel::class.java)
         observeViewModel()
+        swipeToRefresh()
+        toolBarBack()
+    }
 
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            binding.swipeRefreshLayout.isRefreshing = false
-            viewModel.refresh()
-            observeViewModel()
-        }
-
+    private fun toolBarBack() {
         binding.toolbarHome.apply {
             setNavigationIcon(R.drawable.ic_baseline_arrow_back)
             setNavigationOnClickListener {
 
+//                Click the toolbar arrow to go back and clear the back stack
                 val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
                 val count: Int = fragmentManager.backStackEntryCount
                 for (i in 0 until count) {
@@ -57,6 +55,14 @@ class PhotoFragment : Fragment(R.layout.fragment_item_list) {
                     .replace(R.id.fragmentContainer, MainFragment.newInstance())
                     .commit()
             }
+        }
+    }
+
+    private fun swipeToRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = false
+            viewModel.refresh()
+            observeViewModel()
         }
     }
 

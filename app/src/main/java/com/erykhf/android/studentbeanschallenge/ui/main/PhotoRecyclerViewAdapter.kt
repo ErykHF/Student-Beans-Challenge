@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.erykhf.android.studentbeanschallenge.databinding.FragmentItemBinding
 import com.erykhf.android.studentbeanschallenge.model.PhotosDataItem
-import com.erykhf.android.studentbeanschallenge.R
 import com.erykhf.android.studentbeanschallenge.utils.getProgressDrawable
 import com.erykhf.android.studentbeanschallenge.utils.loadImage
-
 
 
 class PhotoRecyclerViewAdapter(var photos: ArrayList<PhotosDataItem>) :
@@ -19,12 +17,9 @@ class PhotoRecyclerViewAdapter(var photos: ArrayList<PhotosDataItem>) :
         photos.clear()
         photos.addAll(newPhotos)
         notifyDataSetChanged()
-
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         return ViewHolder(
             FragmentItemBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -32,12 +27,10 @@ class PhotoRecyclerViewAdapter(var photos: ArrayList<PhotosDataItem>) :
                 false
             )
         )
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(photos[position])
-
     }
 
     override fun getItemCount() = photos.size
@@ -51,11 +44,6 @@ class PhotoRecyclerViewAdapter(var photos: ArrayList<PhotosDataItem>) :
             val photoUri = photoData.thumbnailUrl
             photoText.text = photoData.title
             photoImage.loadImage("$photoUri.jpg", progressDrawable)
-
-
         }
-
     }
-
-
 }
