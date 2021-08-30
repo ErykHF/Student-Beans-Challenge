@@ -43,7 +43,7 @@ class PhotoRecyclerViewAdapter(var photos: ArrayList<PhotosDataItem>) :
         fun bind(photoData: PhotosDataItem) {
             val photoUri = photoData.thumbnailUrl
             photoText.text = photoData.title
-            photoImage.loadImage("$photoUri.jpg", progressDrawable)
+            photoImage.loadImage(photoUri, progressDrawable)
         }
     }
 }
