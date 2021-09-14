@@ -5,8 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.erykhf.android.studentbeanschallenge.R
 import com.erykhf.android.studentbeanschallenge.databinding.MainFragmentBinding
-import com.erykhf.android.studentbeanschallenge.utils.emailValidation
-import com.erykhf.android.studentbeanschallenge.utils.passwordValidation
+import com.erykhf.android.studentbeanschallenge.utils.Util.emailValidation
+import com.erykhf.android.studentbeanschallenge.utils.Util.passwordValidation
 
 class MainFragment : Fragment(R.layout.main_fragment) {
 

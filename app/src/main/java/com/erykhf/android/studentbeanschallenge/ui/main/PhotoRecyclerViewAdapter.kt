@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.erykhf.android.studentbeanschallenge.databinding.FragmentItemBinding
 import com.erykhf.android.studentbeanschallenge.model.PhotosDataItem
-import com.erykhf.android.studentbeanschallenge.utils.getProgressDrawable
-import com.erykhf.android.studentbeanschallenge.utils.loadImage
+import com.erykhf.android.studentbeanschallenge.utils.Util.getProgressDrawable
+import com.erykhf.android.studentbeanschallenge.utils.Util.loadImage
+
 
 
 class PhotoRecyclerViewAdapter(var photos: ArrayList<PhotosDataItem>) :
